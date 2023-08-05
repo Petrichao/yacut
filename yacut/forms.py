@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, URLField
 from wtforms.validators import URL, DataRequired, Length, Optional, Regexp
+from settings import LENGTH_SHORT_URL
 
 DESCRIPTION_URL = 'Длинная ссылка'
 MISSING_DATA = 'Обязательное поле'
@@ -20,8 +21,9 @@ class URLForm(FlaskForm):
     custom_id = URLField(
         DESCRIPTION_SHORT,
         validators=[
-            Length(1, 16,
-                   message=ERROR_LEN),
+            Length(
+                max=LENGTH_SHORT_URL,
+                message=ERROR_LEN),
             Optional(),
             Regexp(PATTERN_SHORT_URL,
                    message=ERROR_SHORT_URL)

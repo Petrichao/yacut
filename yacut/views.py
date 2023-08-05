@@ -6,14 +6,6 @@ from .models import URLMap
 from .utils import get_unique_short
 
 
-# def get_unique_short_id(length):
-#     return ''.join(
-#         random.choice(
-#             string.ascii_letters + string.digits
-#         ) for _ in range(length)
-#     )
-
-
 @app.route('/', methods=['GET', 'POST'])
 def index_view():
     form = URLForm()
@@ -37,7 +29,6 @@ def index_view():
 
 
 @app.route('/<string:short>', methods=['GET'])
-def yacat_redirect(short):
-    print(short)
+def yacut_redirect(short):
     return redirect(
         URLMap.query.filter_by(short=short).first_or_404().original)

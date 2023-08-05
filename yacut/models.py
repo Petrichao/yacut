@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from flask import url_for
+from settings import LENGTH_SHORT_URL
 
 from . import db
 
@@ -8,7 +9,7 @@ from . import db
 class URLMap(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     original = db.Column(db.String(512), nullable=False)
-    short = db.Column(db.String(512), nullable=False, unique=True)
+    short = db.Column(db.String(LENGTH_SHORT_URL), nullable=False, unique=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def to_dict(self):
